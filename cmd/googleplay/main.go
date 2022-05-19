@@ -3,8 +3,8 @@ package main
 import (
    "flag"
    "fmt"
-   "strings"
    gp "github.com/89z/googleplay"
+   "strings"
 )
 
 func main() {
@@ -17,6 +17,9 @@ func main() {
    // armeabi
    var armeabi bool
    flag.BoolVar(&armeabi, "armeabi", false, "armeabi-v7a ABI")
+   // x86
+   var x86 bool
+   flag.BoolVar(&x86, "x86", false, "x86 ABI")
    // d
    var device bool
    flag.BoolVar(&device, "d", false, "create device")
@@ -53,7 +56,7 @@ func main() {
          panic(err)
       }
    } else {
-      nat := newNative(armeabi, arm64)
+      nat := newNative(armeabi, arm64, x86)
       if device {
          err := nat.device()
          if err != nil {

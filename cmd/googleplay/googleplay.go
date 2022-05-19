@@ -3,11 +3,11 @@ package main
 import (
    "fmt"
    "github.com/89z/format"
+   gp "github.com/89z/googleplay"
    "io"
    "net/http"
    "os"
    "time"
-   gp "github.com/89z/googleplay"
 )
 
 func doDelivery(head *gp.Header, app string, ver uint64) error {
@@ -65,14 +65,17 @@ type native struct {
    platform gp.String
 }
 
-func newNative(armeabi, arm64 bool) native {
+func newNative(armeabi, arm64, x86 bool) native {
    if armeabi {
       return native{"googleplay/armeabi.json", gp.Armeabi}
    }
    if arm64 {
       return native{"googleplay/arm64.json", gp.Arm64}
    }
-   return native{"googleplay/x86.json", gp.X86}
+   if x86 {
+      return native{"googleplay/x86.json", gp.X86}
+   }
+   return native{"googleplay/x64.json", gp.X64}
 }
 
 func (n native) device() error {

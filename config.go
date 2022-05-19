@@ -14,6 +14,7 @@ const (
    Armeabi String = "armeabi-v7a"
    // com.google.android.youtube
    X86 String = "x86"
+   X64 String = "x86_64"
 )
 
 // These can use default values, but they must all be included
@@ -79,7 +80,7 @@ func (c Config) Checkin(platform String) (*Device, error) {
    checkin := Message{
       4: Message{ // checkin
          1: Message{ // build
-            10: Varint(29), // sdkVersion
+            10: Varint(19), // sdkVersion
          },
       },
       14: Varint(3), // version
